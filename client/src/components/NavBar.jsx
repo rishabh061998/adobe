@@ -20,7 +20,7 @@ const NavBar=()=>{
     <Header position="static">
     <Toolbar>
 <Tabs to="/">Adobe Data center</Tabs>
-<Tabs to="/all">All User</Tabs>
+<Tabs to="/all">User List</Tabs>
 <Tabs to='/add'>Add User</Tabs>
     </Toolbar>
 

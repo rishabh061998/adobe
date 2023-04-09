@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableHead ,TableRow,styled,Button} from "@mui/material"
 import React ,{useEffect,useState} from "react"
-import { getUsers } from "../service/api"
-
+import { getUsers,deleteUser} from "../service/api"
+import  {Link} from "react-router-dom"
 
 const StyledTable = styled(Table)`
     width: 90%;
@@ -36,6 +36,11 @@ const [users,setUser]=useState([])
        setUser(response.data)
        
     }
+
+    const deleteUserDetails=async(id)=>{
+           await deleteUser(id)
+           getAllUsers()
+    }
     return(
        <StyledTable>
             <TableHead>
@@ -54,14 +59,14 @@ const [users,setUser]=useState([])
             <TableBody>
            {
             users.map(user=>(
-                <TRow>
+                <TRow key={user._id}>
                   <TableCell>{user._id}</TableCell>
                   <TableCell>{user.name}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.bio}</TableCell>
                   <TableCell>
-                    <Button variant="contained" style={{marginRight:10}}>Edit</Button>
-                    <Button variant="contained" color="secondary">Delete</Button>
+                    <Button variant="contained" style={{marginRight:10}} component={Link} to={`/edit/${user._id}`}>Edit</Button>
+                    <Button variant="contained" color="secondary" onClick={()=>deleteUserDetails(user._id)}>Delete</Button>
                   </TableCell>
                 </TRow>
             ))
